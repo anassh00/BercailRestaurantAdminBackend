@@ -30,6 +30,15 @@ class Post
     #[ApiProperty(types: ['https://schema.org/image'])]
     public ?MediaObject $image = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $likesNum = null;
+
+    #[ORM\Column(type: Types::ARRAY, nullable: true)]
+    private array $likesUsersIds = [];
+
+    #[ORM\Column(nullable: true)]
+    private ?int $userId = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -67,6 +76,42 @@ class Post
     public function setPublicationDate(?\DateTimeInterface $publication_date): self
     {
         $this->publication_date = $publication_date;
+
+        return $this;
+    }
+
+    public function getLikesNum(): ?int
+    {
+        return $this->likesNum;
+    }
+
+    public function setLikesNum(?int $likesNum): self
+    {
+        $this->likesNum = $likesNum;
+
+        return $this;
+    }
+
+    public function getLikesUsersIds(): array
+    {
+        return $this->likesUsersIds;
+    }
+
+    public function setLikesUsersIds(?array $likesUsersIds): self
+    {
+        $this->likesUsersIds = $likesUsersIds;
+
+        return $this;
+    }
+
+    public function getUserId(): ?int
+    {
+        return $this->userId;
+    }
+
+    public function setUserId(?int $userId): self
+    {
+        $this->userId = $userId;
 
         return $this;
     }
