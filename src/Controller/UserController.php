@@ -34,56 +34,9 @@ class UserController extends AbstractController
     #[Route('/user/create', name: 'app_user', methods : ['POST'])]
     public function create(Request $request, UserPasswordHasherInterface $passwordEncoder, ManagerRegistry $doctrine)
     {
-    //     $data = [
-    //         // 'firstName' => $request->request->get('firstName'),
-    //         // 'lastName' => $request->request->get('lastName'),
-    //         'password' => $request->request->get('password'),
-    //         'username' => $request->request->get('username')
-    //     ];
-
-    //     $validator = Validation::createValidator();
-    //     $constraint = new Assert\Collection(array(
-    //         // the keys correspond to the keys in the input array
-    //         // 'firstName' => new Assert\Length(array('min' => 1)),
-    //         // 'lastName' => new Assert\Length(array('min' => 1)),
-    //         'password' => new Assert\Length(array('min' => 1)),
-    //         'username' => new Assert\Length(array('min' => 1))
-    //         // 'userEmail' => new Assert\Email()
-    //     ));
-    //     $violations = $validator->validate($data, $constraint);
-    //     if ($violations->count() > 0) {
-    //         return new JsonResponse(["error" => (string)$violations], 500);
-    //     }
-    //     // $firstName = $data['firstName'];
-    //     // $lastName = $data['lastName'];
-    //     $password = $data['password'];
-    //     $username = $data['username'];
-    //     // $userRole = $request->request->get('userRole');
-
-    //     $user = new User();
-    //     $user
-    //         // ->setFirstName($firstName)
-    //         // ->setLastName($lastName)
-    //         ->setPassword($password)
-    //         ->setUsername($username)
-    //         // ->setRoles($userRole)
-    //         ->onPrePersist()
-    //     ;
-
-    //     $password = $passwordEncoder->encodePassword($user, $user->getPassword());
-    //     $user->setPassword($password);
-
-        // try {
-        //     $entityManager = $this->getDoctrine()->getManager();
-        //     $entityManager->persist($user);
-        //     $entityManager->flush();
-        // } catch (\Exception $e) {
-        //     return new JsonResponse(["error" => $e->getMessage()], 500);
-        // }
-        // return new JsonResponse(["success" => $user->getUsername(). " has been registered!"], 200);
-            // Get the plain-text password from the request
+    
             $parameters = json_decode($request->getContent(), true);
-            echo $parameters['username']; // will print 'user'
+            //echo $parameters['username'];
 
             $password = $parameters['password'];
             $username = $parameters['username'];
@@ -93,12 +46,6 @@ class UserController extends AbstractController
             // Hash the password
             $hashedPassword = $this->hasher->hashPassword($user, $password);
             $user->setPassword($hashedPassword);
-    
-            // Create a new user and set the hashed password
-            // $user = new User();
-            // $request->setPassword($hashedPassword);
-    
-            // ...
     
             try {
                 // Save the user to the database
