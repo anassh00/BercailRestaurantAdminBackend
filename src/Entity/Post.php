@@ -115,4 +115,11 @@ class Post
 
         return $this;
     }
+
+    public function setImage(?MediaObject $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
 }

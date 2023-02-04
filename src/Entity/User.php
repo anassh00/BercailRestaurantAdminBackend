@@ -40,6 +40,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ApiProperty(types: ['https://schema.org/image'])]
     public ?MediaObject $image = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $description = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -130,6 +133,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCreatedAt(?\DateTimeImmutable $created_at): self
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }
