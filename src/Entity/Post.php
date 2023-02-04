@@ -8,22 +8,22 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
-#[ApiResource]
+#[ApiResource(paginationEnabled: false)]
 class Post
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    public ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $description = null;
+    public ?string $description = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $filename = null;
+    public ?string $filename = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $publication_date = null;
+    public ?\DateTimeInterface $publication_date = null;
 
     #[ORM\ManyToOne(targetEntity: MediaObject::class)]
     #[ORM\JoinColumn(nullable: true)]
@@ -31,13 +31,13 @@ class Post
     public ?MediaObject $image = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $likesNum = null;
+    public ?int $likesNum = null;
 
     #[ORM\Column(type: Types::ARRAY, nullable: true)]
-    private array $likesUsersIds = [];
+    public array $likesUsersIds = [];
 
     #[ORM\Column(nullable: true)]
-    private ?int $userId = null;
+    public ?string $userId = null;
 
     public function getId(): ?int
     {
@@ -104,12 +104,12 @@ class Post
         return $this;
     }
 
-    public function getUserId(): ?int
+    public function getUserId(): ?string
     {
         return $this->userId;
     }
 
-    public function setUserId(?int $userId): self
+    public function setUserId(?string $userId): self
     {
         $this->userId = $userId;
 

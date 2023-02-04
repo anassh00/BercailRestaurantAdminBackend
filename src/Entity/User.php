@@ -15,10 +15,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    public ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
-    private ?string $username = null;
+    public ?string $username = null;
 
     #[ORM\Column]
     private array $roles = [];
@@ -30,7 +30,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $email = null;
+    public ?string $email = null;
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $created_at = null;
@@ -41,7 +41,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public ?MediaObject $image = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $description = null;
+    public ?string $description = null;
 
     public function getId(): ?int
     {

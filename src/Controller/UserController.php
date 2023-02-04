@@ -31,6 +31,23 @@ class UserController extends AbstractController
         ]);
     }
 
+    #[Route('/userInfo/{id}')]
+    public function getUserInfo($id, ManagerRegistry $doctrine): Response
+    {
+        try{
+        $em = $doctrine->getManager();
+        $repository = $em->getRepository(User::class);
+        $query = $repository->createQueryBuilder('e')
+            ->where('e.username = :value')
+            ->setParameter('value', $id)
+            ->getQuery();
+        $user = $query->getResult();
+        } catch (\Exception $e) {
+            return new JsonResponse(["error" => $e->getMessage()], 500);
+        }
+            return new JsonResponse($user);
+        }
+
     #[Route('/user/create', name: 'app_user', methods : ['POST'])]
     public function create(Request $request, UserPasswordHasherInterface $passwordEncoder, ManagerRegistry $doctrine)
     {
@@ -56,7 +73,5 @@ class UserController extends AbstractController
                 return new JsonResponse(["error" => $e->getMessage()], 500);
             }
             return new JsonResponse(["success" => $user->getUsername(). " has been registered!"], 200);
-
-    
     }
 }

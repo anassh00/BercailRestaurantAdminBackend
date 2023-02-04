@@ -24,6 +24,7 @@ public function onAuthenticationSuccessResponse(AuthenticationSuccessEvent $even
         'username' => $user->getUserIdentifier(),
         'email' => $user->getEmail(),
         'description' => $user->getDescription(),
+        'id' => $user->getId(),
     );
 
     $event->setData($data);
