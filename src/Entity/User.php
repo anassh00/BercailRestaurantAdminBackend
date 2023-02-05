@@ -43,9 +43,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     public ?string $description = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    public ?string $filename = null;
+
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
     }
 
     public function getUsername(): ?string
@@ -145,6 +153,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getFilename(): ?string
+    {
+        return $this->filename;
+    }
+
+    public function setFilename(?string $filename): self
+    {
+        $this->filename = $filename;
 
         return $this;
     }

@@ -57,9 +57,11 @@ class UserController extends AbstractController
 
             $password = $parameters['password'];
             $username = $parameters['username'];
+            $email = $parameters['email'];
             $user = new User();
             $user->setPassword($password);
             $user->setUsername($username);
+            $user->setEmail($email);
             // Hash the password
             $hashedPassword = $this->hasher->hashPassword($user, $password);
             $user->setPassword($hashedPassword);
