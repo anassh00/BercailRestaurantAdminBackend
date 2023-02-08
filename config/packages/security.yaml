@@ -48,6 +48,10 @@ security:
         # - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/api/docs, roles: PUBLIC_ACCESS }
         - { path: ^/api/login_check, roles: PUBLIC_ACCESS }
+        - { path: ^/post, roles: PUBLIC_ACCESS }
+        - { path: ^/carte, roles: PUBLIC_ACCESS }
+        - { path: ^/api/messages, roles: PUBLIC_ACCESS }
+        - { path: ^/api/reservations, roles: PUBLIC_ACCESS }
         - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
 
