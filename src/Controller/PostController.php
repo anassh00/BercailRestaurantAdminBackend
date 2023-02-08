@@ -40,6 +40,40 @@ class PostController extends AbstractController
             return new JsonResponse($posts);
         }
 
+    #[Route('/carte/restaurant')]
+    public function getCarteRestaurant(ManagerRegistry $doctrine): Response
+    {
+        try{
+        $em = $doctrine->getManager();
+        $repository = $em->getRepository(Post::class);
+        $query = $repository->createQueryBuilder('e')
+            ->where('e.cartetype = :value')
+            ->setParameter('value', "1")
+            ->getQuery();
+        $posts = $query->getResult();
+        } catch (\Exception $e) {
+            return new JsonResponse(["error" => $e->getMessage()], 500);
+        }
+            return new JsonResponse(end($posts));
+    }
+
+    #[Route('/carte/boissons')]
+    public function getCarteBoissons(ManagerRegistry $doctrine): Response
+    {
+        try{
+        $em = $doctrine->getManager();
+        $repository = $em->getRepository(Post::class);
+        $query = $repository->createQueryBuilder('e')
+            ->where('e.cartetype = :value')
+            ->setParameter('value', "2")
+            ->getQuery();
+        $posts = $query->getResult();
+        } catch (\Exception $e) {
+            return new JsonResponse(["error" => $e->getMessage()], 500);
+        }
+            return new JsonResponse(end($posts));
+    }
+
     #[Route('/posts/create', name: 'app_post', methods : ['POST'])]
     public function createPost(Request $request, ManagerRegistry $doctrine)
     {
@@ -47,6 +81,7 @@ class PostController extends AbstractController
             $description = $parameters['description'];
             $image = $parameters['image'];
             $user_id = $parameters['user_id'];
+            $cartetype = $parameters['cartetype'];
 
             list($first, $api, $mediaObject, $id) = explode("/", $image);
             
@@ -59,6 +94,8 @@ class PostController extends AbstractController
             $post->setDescription($description);
             $post->setImage($imagePath);
             $post->setUserId($user_id);
+            $post->setCartetype($cartetype);
+
 
             try {
                 // Save the post to the database

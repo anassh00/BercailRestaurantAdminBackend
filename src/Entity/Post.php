@@ -39,6 +39,12 @@ class Post
     #[ORM\Column(nullable: true)]
     public ?string $userId = null;
 
+    #[ORM\Column(nullable: true)]
+    public ?int $type = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    public ?string $cartetype = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -119,6 +125,30 @@ class Post
     public function setImage(?MediaObject $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getType(): ?int
+    {
+        return $this->type;
+    }
+
+    public function setType(?int $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getCartetype(): ?string
+    {
+        return $this->cartetype;
+    }
+
+    public function setCartetype(?string $cartetype): self
+    {
+        $this->cartetype = $cartetype;
 
         return $this;
     }
