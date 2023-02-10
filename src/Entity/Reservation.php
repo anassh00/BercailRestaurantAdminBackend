@@ -36,6 +36,9 @@ class Reservation
     #[ORM\Column(length: 255, nullable: true)]
     public ?string $time = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    public ?string $datestring = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -121,6 +124,18 @@ class Reservation
     public function setTime(?string $time): self
     {
         $this->time = $time;
+
+        return $this;
+    }
+
+    public function getDatestring(): ?string
+    {
+        return $this->datestring;
+    }
+
+    public function setDatestring(?string $datestring): self
+    {
+        $this->datestring = $datestring;
 
         return $this;
     }
